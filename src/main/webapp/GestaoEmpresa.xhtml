@@ -18,7 +18,10 @@
 					<p:commandButton 
 						value="Nova" 
 						icon="ui-icon-document"
-						onclick="PF('edicaoEmpresaDialog').show();"/>
+						action="#{gestaoEmpresasBean.prepararNovoCadastro}"
+						process="@this"
+						update="empresa-dialog"
+						oncomplete="PF('edicaoEmpresaDialog').show();"/>
 					<span class="ui-separator">
 						<span class="ui-icon ui-icon-grip-dotted-vertical"/>
 					</span>
@@ -34,7 +37,8 @@
 				paginator="true" 
 				rows="10" 
 				paginatorPosition="bottom"
-				style="margin-top:10px;">
+				style="margin-top:10px;"
+				id="empresa-table">
 
 				<p:column headerText="Razão social" sortBy="#{empresa.razaoSocial}">
 					<h:outputText value="#{empresa.razaoSocial}" />
@@ -50,12 +54,63 @@
 			
 			<p:dialog 
 				header="Nova empresa"
+				id="empresa-dialog"
 				widgetVar="edicaoEmpresaDialog"
 				resizable="true"
 				modal="true"
 				closeOnEscape="true"
 				showEffect="true">
-				<p:commandButton value="teste"/>
+					<h:panelGrid columns="2" id="panel-dialog">
+						<h:outputLabel value="Nome fantasia" for="nome-fantasia"/>
+						<h:inputText 
+							id="nome-fantasia"
+							size="60" 
+							maxlength="80"
+							value="#{gestaoEmpresasBean.empresaEdicao.nomeFantasia}"/>
+						
+						<h:outputLabel value="Razão sociao" for="razao-social"/>
+						<h:inputText 
+							id="razao-social" 
+							size="60" 
+							maxlength="120"
+							value="#{gestaoEmpresasBean.empresaEdicao.razaoSocial}"/>
+						
+						<h:outputLabel value="Cnpj" for="cnpj"/>
+						<h:inputText 
+							id="cnpj" 
+							size="18" 
+							maxlength="18"
+							value="#{gestaoEmpresasBean.empresaEdicao.cnpj}"/>
+						
+						<h:outputLabel value="Data fundação" for="data-fundacao"/>
+						<h:inputText 
+							id="data-fundacao" 
+							size="10" 
+							maxlength="10"
+							value="#{gestaoEmpresasBean.empresaEdicao.dataFundacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:inputText>
+						
+						<h:outputLabel value="Tipo empresa" for="tipo"/>
+						<p:selectOneMenu id="tipo" value="#{gestaoEmpresasBean.empresaEdicao.tipo}">
+							<f:selectItem itemLabel="Selecione..."/>
+							<f:selectItems 
+								value="#{gestaoEmpresasBean.tipoEmpresa}"
+								var="tipo"
+								itemValue="#{tipo}"
+								itemLabel="#{tipo.descricao}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel/>
+						<p:commandButton 
+							value="Salvar" 
+							id="salvar-button"
+							action="#{gestaoEmpresasBean.salvar}"
+							process="empresa-dialog"
+							oncomplete="PF('edicaoEmpresaDialog').hide()"
+							update="empresa-table"/>
+					</h:panelGrid>				
+				
 			</p:dialog>
 			
 		</h:form>

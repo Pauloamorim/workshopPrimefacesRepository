@@ -8,7 +8,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.algaworks.erp.model.Empresa;
+import com.algaworks.erp.model.TipoEmpresa;
 import com.algaworks.erp.repository.Empresas;
+import com.algaworks.erp.service.CadastroEmpresaService;
+import com.algaworks.erp.util.FacesMessages;
 
 @Named
 @ViewScoped
@@ -19,14 +22,45 @@ public class GestaoEmpresasBean implements Serializable {
 	@Inject
 	private Empresas empresas;
 	
+	@Inject
+	private CadastroEmpresaService cadastroEmpresaService;
+	
+	@Inject
+	private FacesMessages messages;
+	
+	private Empresa empresaEdicao = new Empresa();
+	
 	private List<Empresa> todasEmpresas;
+	
+	public void prepararNovoCadastro(){
+		this.empresaEdicao = new Empresa();
+	}
 	
 	public void consultar() {
 		todasEmpresas = empresas.todas();
+	}
+	
+	public void salvar(){
+		cadastroEmpresaService.salvar(getEmpresaEdicao());
+		consultar();
+		messages.info("Empresa salva com sucesso");
 	}
 
 	public List<Empresa> getTodasEmpresas() {
 		return todasEmpresas;
 	}
+	public TipoEmpresa[] getTipoEmpresa(){
+		return TipoEmpresa.values();
+	}
+
+	public Empresa getEmpresaEdicao() {
+		return empresaEdicao;
+	}
+
+	public void setEmpresaEdicao(Empresa empresaEdicao) {
+		this.empresaEdicao = empresaEdicao;
+	}
+	
+	
 	
 }
