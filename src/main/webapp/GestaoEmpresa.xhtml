@@ -13,6 +13,9 @@
 		<h1>Cadastro de empresas</h1>
 		
 		<h:form>
+		
+			<p:messages autoUpdate="true"/>
+		
 			<p:toolbar>
 				<f:facet name="left">
 					<p:commandButton 
@@ -60,38 +63,41 @@
 				modal="true"
 				closeOnEscape="true"
 				showEffect="true">
+				
+					<p:messages id="msgs-dialog"/>
+				
 					<h:panelGrid columns="2" id="panel-dialog">
-						<h:outputLabel value="Nome fantasia" for="nome-fantasia"/>
-						<h:inputText 
-							id="nome-fantasia"
+						<p:outputLabel value="Nome fantasia" for="nomeFantasia"/>
+						<p:inputText 
+							id="nomeFantasia"
 							size="60" 
 							maxlength="80"
 							value="#{gestaoEmpresasBean.empresaEdicao.nomeFantasia}"/>
 						
-						<h:outputLabel value="Razão sociao" for="razao-social"/>
-						<h:inputText 
+						<p:outputLabel value="Razão sociao" for="razao-social"/>
+						<p:inputText 
 							id="razao-social" 
 							size="60" 
 							maxlength="120"
 							value="#{gestaoEmpresasBean.empresaEdicao.razaoSocial}"/>
 						
-						<h:outputLabel value="Cnpj" for="cnpj"/>
-						<h:inputText 
+						<p:outputLabel value="Cnpj" for="cnpj"/>
+						<p:inputText 
 							id="cnpj" 
 							size="18" 
 							maxlength="18"
 							value="#{gestaoEmpresasBean.empresaEdicao.cnpj}"/>
 						
-						<h:outputLabel value="Data fundação" for="data-fundacao"/>
-						<h:inputText 
+						<p:outputLabel value="Data fundação" for="data-fundacao"/>
+						<p:inputText 
 							id="data-fundacao" 
 							size="10" 
 							maxlength="10"
 							value="#{gestaoEmpresasBean.empresaEdicao.dataFundacao}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</h:inputText>
+						</p:inputText>
 						
-						<h:outputLabel value="Tipo empresa" for="tipo"/>
+						<p:outputLabel value="Tipo empresa" for="tipo"/>
 						<p:selectOneMenu id="tipo" value="#{gestaoEmpresasBean.empresaEdicao.tipo}">
 							<f:selectItem itemLabel="Selecione..."/>
 							<f:selectItems 
@@ -107,8 +113,8 @@
 							id="salvar-button"
 							action="#{gestaoEmpresasBean.salvar}"
 							process="empresa-dialog"
-							oncomplete="PF('edicaoEmpresaDialog').hide()"
-							update="empresa-table"/>
+							oncomplete="if(!args.validationFailed) PF('edicaoEmpresaDialog').hide()"
+							update="empresa-table msgs-dialog panel-dialog"/>
 					</h:panelGrid>				
 				
 			</p:dialog>
