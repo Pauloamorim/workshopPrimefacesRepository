@@ -84,10 +84,9 @@
 							value="#{gestaoEmpresasBean.empresaEdicao.razaoSocial}"/>
 						
 						<p:outputLabel value="Cnpj" for="cnpj"/>
-						<p:inputText 
-							id="cnpj" 
-							size="18" 
-							maxlength="18"
+						<p:inputMask 
+							id="cnpj"
+							mask="99.999.999/9999-99"
 							value="#{gestaoEmpresasBean.empresaEdicao.cnpj}"/>
 						
 						<p:outputLabel value="Data fundação" for="data-fundacao"/>
