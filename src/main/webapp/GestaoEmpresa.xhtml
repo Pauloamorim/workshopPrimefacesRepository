@@ -90,13 +90,11 @@
 							value="#{gestaoEmpresasBean.empresaEdicao.cnpj}"/>
 						
 						<p:outputLabel value="Data fundação" for="data-fundacao"/>
-						<p:inputText 
-							id="data-fundacao" 
-							size="10" 
-							maxlength="10"
-							value="#{gestaoEmpresasBean.empresaEdicao.dataFundacao}">
-							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</p:inputText>
+						<p:calendar
+							id="data-fundacao"
+							pattern="dd/MM/yyyy"
+							mask="99/99/9999"
+							value="#{gestaoEmpresasBean.empresaEdicao.dataFundacao}"/>
 						
 						<p:outputLabel value="Tipo empresa" for="tipo"/>
 						<p:selectOneMenu id="tipo" value="#{gestaoEmpresasBean.empresaEdicao.tipo}">
