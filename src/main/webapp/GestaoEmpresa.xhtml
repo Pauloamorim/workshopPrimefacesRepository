@@ -12,9 +12,9 @@
 		</f:metadata>
 		<h1>Cadastro de empresas</h1>
 		
-		<h:form>
+		<h:form id="frm">
 		
-			<p:messages autoUpdate="true"/>
+			<p:messages id="msgs"/>
 		
 			<p:toolbar>
 				<f:facet name="left">
@@ -114,7 +114,7 @@
 							action="#{gestaoEmpresasBean.salvar}"
 							process="empresa-dialog"
 							oncomplete="if(!args.validationFailed) PF('edicaoEmpresaDialog').hide()"
-							update="empresa-table msgs-dialog panel-dialog"/>
+							update="msgs-dialog panel-dialog"/>
 					</h:panelGrid>				
 				
 			</p:dialog>

@@ -1,11 +1,15 @@
 package com.algaworks.erp.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
 
 import com.algaworks.erp.model.Empresa;
 import com.algaworks.erp.model.TipoEmpresa;
@@ -44,6 +48,8 @@ public class GestaoEmpresasBean implements Serializable {
 		cadastroEmpresaService.salvar(getEmpresaEdicao());
 		consultar();
 		messages.info("Empresa salva com sucesso");
+		
+		RequestContext.getCurrentInstance().update(Arrays.asList("frm:msgs","frm:empresa-table"));
 	}
 
 	public List<Empresa> getTodasEmpresas() {
