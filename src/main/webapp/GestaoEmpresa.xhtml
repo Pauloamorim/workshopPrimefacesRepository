@@ -24,7 +24,9 @@
 						action="#{gestaoEmpresasBean.prepararNovoCadastro}"
 						process="@this"
 						update="empresa-dialog"
-						oncomplete="PF('edicaoEmpresaDialog').show();"/>
+						oncomplete="PF('edicaoEmpresaDialog').show();">
+						<p:resetInput target="empresa-dialog"/>
+					</p:commandButton>
 					<span class="ui-separator">
 						<span class="ui-icon ui-icon-grip-dotted-vertical"/>
 					</span>
